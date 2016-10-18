@@ -3,7 +3,7 @@
     ViewBag.Title = "Index";
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
-<h2>Movies</h2>
+<h2><b>Movies</b></h2>
 
 @if (!Model.Any())
 {
@@ -15,14 +15,16 @@ else
     <table class="table table-bordered table-hover">
         <thead>
             <tr>
-                <th>Movie</th>
+                <th><b>Movie</b></th>
+                <th><b>Genre</b></th>
             </tr>
         </thead>
         <tbody>
             @foreach (var movie in Model)
             {
                 <tr>
-                    <td>@movie.Name</td>
+                    <td>@Html.ActionLink(movie.Name,"Details","Movies",new {Id=movie.Id },null)</td>
+                    <td>@movie.Genre.Name</td>
                 </tr>
             }
         </tbody>
