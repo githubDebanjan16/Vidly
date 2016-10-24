@@ -6,6 +6,7 @@ using System.Web.Mvc;
 using Vidly.Models;
 using Vidly.ViewModels;
 using System.Data.Entity;
+using Vidly.ViewModels;
 
 namespace Vidly.Controllers
 {
@@ -19,6 +20,62 @@ namespace Vidly.Controllers
         protected override void Dispose(bool disposing)
         {
             _context.Dispose();
+        }
+
+        public ActionResult New()
+        {
+            var genres = _context.Genres.ToList();
+            var viewModel = new MovieFormViewModel() {
+                Genre = genres,
+                //Movie= new Movie()
+            };
+            return View("MovieForm",viewModel);
+        }
+
+        public ActionResult Edit(int id)
+        {
+            var movieToEdit = _context.Movies.Single(m => m.Id == id);
+            if (movieToEdit == null)
+                return HttpNotFound();
+            var viewModel = new MovieFormViewModel(movieToEdit)
+            {
+                    Genre = _context.Genres.ToList()
+            };
+            return View("MovieForm", viewModel);
+        }
+
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public ActionResult SaveMovie(Movie movie)
+        {
+           if(!ModelState.IsValid)
+            {
+                var genres = _context.Genres.ToList();
+                var viewModel = new MovieFormViewModel(movie)
+                {
+                    Genre = genres
+                    
+                };
+                return View("MovieForm", viewModel);
+
+            }
+            if(movie.Id==0)
+            {
+                _context.Movies.Add(movie);
+            }
+            else
+            {
+                var movieToUpdate = _context.Movies.Single(m => m.Id == movie.Id);
+
+                movieToUpdate.Name = movie.Name;
+                movieToUpdate.DateAdded = movie.DateAdded;
+                movieToUpdate.DateReleased = movie.DateReleased;
+                movieToUpdate.GenreId = movie.GenreId;
+                movieToUpdate.NumberInStock = movie.NumberInStock;
+            }
+            _context.SaveChanges();
+            return RedirectToAction ("Index", "Movies");
+            
         }
         public ActionResult Index()
         {
