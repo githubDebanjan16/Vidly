@@ -79,8 +79,8 @@ namespace Vidly.Controllers
         }
         public ActionResult Index()
         {
-            var movies = _context.Movies.Include(x=>x.Genre).ToList();
-            return View(movies);
+            //var movies = _context.Movies.Include(x=>x.Genre).ToList();
+            return View();
         }
 
         public ActionResult Details(int Id)
