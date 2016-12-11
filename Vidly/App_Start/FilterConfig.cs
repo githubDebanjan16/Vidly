@@ -8,6 +8,9 @@ namespace Vidly
         public static void RegisterGlobalFilters(GlobalFilterCollection filters)
         {
             filters.Add(new HandleErrorAttribute());
+            filters.Add(new AuthorizeAttribute());
+            //Application will no longer available through Http cHannel
+            filters.Add(new RequireHttpsAttribute());
         }
     }
 }
