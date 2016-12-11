@@ -69,6 +69,7 @@ namespace Vidly.Controllers.Api
 
         //Delete /api/movie/1
         [HttpDelete]
+        //[Authorize(Roles = RoleName.CanManageMovies)]
         public void DeleteMovie(int id)
         {
             var movieInDb = _context.Movies.SingleOrDefault(m => m.Id == id);
