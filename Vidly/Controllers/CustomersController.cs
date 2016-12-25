@@ -4,6 +4,8 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Web;
 using System.Web.Mvc;
+using System.Runtime.Caching;
+
 using Vidly.Models;
 using Vidly.ViewModels;
 
@@ -89,6 +91,11 @@ namespace Vidly.Controllers
             //EagerLoading
             //var customers = _context.Customers.Include(c=>c.MembershipType).ToList();
             //return View(customers);
+            if(MemoryCache.Default["Genre"]==null)
+            {
+                MemoryCache.Default["Genre"] = _context.Genres.ToList();
+            }
+            var genres = MemoryCache.Default["Genre"] as IEnumerable<Genre>;
             return View();
         }
 
