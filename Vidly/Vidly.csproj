@@ -48,6 +48,10 @@
       <HintPath>..\packages\AutoMapper.4.1.0\lib\net45\AutoMapper.dll</HintPath>
       <Private>True</Private>
     </Reference>
+    <Reference Include="Elmah, Version=1.2.14706.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\elmah.corelibrary.1.2.2\lib\Elmah.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
     <Reference Include="Glimpse.Ado, Version=1.7.3.0, Culture=neutral, processorArchitecture=MSIL">
       <HintPath>..\packages\Glimpse.Ado.1.7.3\lib\net45\Glimpse.Ado.dll</HintPath>
       <Private>True</Private>
@@ -308,13 +312,9 @@
     <Compile Include="Migrations\201612241806374_AddMovieNumberAvailable.Designer.cs">
       <DependentUpon>201612241806374_AddMovieNumberAvailable.cs</DependentUpon>
     </Compile>
-    <Compile Include="Migrations\201612250120254_AddRentals1.cs" />
-    <Compile Include="Migrations\201612250120254_AddRentals1.Designer.cs">
-      <DependentUpon>201612250120254_AddRentals1.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\201612250127201_AddRentals2.cs" />
-    <Compile Include="Migrations\201612250127201_AddRentals2.Designer.cs">
-      <DependentUpon>201612250127201_AddRentals2.cs</DependentUpon>
+    <Compile Include="Migrations\201612251837066_InitialModel1.cs" />
+    <Compile Include="Migrations\201612251837066_InitialModel1.Designer.cs">
+      <DependentUpon>201612251837066_InitialModel1.cs</DependentUpon>
     </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\AccountViewModels.cs" />
@@ -338,6 +338,8 @@
     <Compile Include="ViewModels\RegisterViewModel.cs" />
   </ItemGroup>
   <ItemGroup>
+    <Content Include="404.html" />
+    <Content Include="App_Readme\Elmah.txt" />
     <Content Include="Content\bootstrap-simplex.css" />
     <Content Include="Content\bootstrap.css" />
     <Content Include="Content\bootstrap.min.css" />
@@ -470,6 +472,11 @@
     <Content Include="Content\DataTables\css\common.scss" />
     <Content Include="Content\toastr.scss" />
     <Content Include="Content\toastr.less" />
+    <Content Include="AppSettings.config">
+      <SubType>Designer</SubType>
+    </Content>
+    <None Include="Properties\PublishProfiles\GoDaddyProfile.pubxml" />
+    <None Include="Properties\PublishProfiles\TestingProfile.pubxml" />
     <None Include="Scripts\jquery-1.10.2.intellisense.js" />
     <Content Include="Scripts\DataTables\autoFill.bootstrap.js" />
     <Content Include="Scripts\DataTables\autoFill.bootstrap.min.js" />
@@ -598,6 +605,9 @@
     <Content Include="Views\Movies\MovieForm.cshtml" />
     <Content Include="Views\Movies\ReadOnlyList.cshtml" />
     <Content Include="Views\Rentals\New.cshtml" />
+    <None Include="Web.Testing.config">
+      <DependentUpon>Web.config</DependentUpon>
+    </None>
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
@@ -653,16 +663,22 @@
     <EmbeddedResource Include="Migrations\201612241806374_AddMovieNumberAvailable.resx">
       <DependentUpon>201612241806374_AddMovieNumberAvailable.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\201612250120254_AddRentals1.resx">
-      <DependentUpon>201612250120254_AddRentals1.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\201612250127201_AddRentals2.resx">
-      <DependentUpon>201612250127201_AddRentals2.cs</DependentUpon>
+    <EmbeddedResource Include="Migrations\201612251837066_InitialModel1.resx">
+      <DependentUpon>201612251837066_InitialModel1.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>
     <VSToolsPath Condition="'$(VSToolsPath)' == ''">$(MSBuildExtensionsPath32)\Microsoft\VisualStudio\v$(VisualStudioVersion)</VSToolsPath>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'Testing|AnyCPU'">
+    <OutputPath>bin\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <Optimize>true</Optimize>
+    <DebugType>pdbonly</DebugType>
+    <PlatformTarget>AnyCPU</PlatformTarget>
+    <ErrorReport>prompt</ErrorReport>
+    <CodeAnalysisRuleSet>MinimumRecommendedRules.ruleset</CodeAnalysisRuleSet>
   </PropertyGroup>
   <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
   <Import Project="$(VSToolsPath)\WebApplications\Microsoft.WebApplication.targets" Condition="'$(VSToolsPath)' != ''" />

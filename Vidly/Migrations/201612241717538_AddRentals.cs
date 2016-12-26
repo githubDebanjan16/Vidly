@@ -2,7 +2,7 @@ namespace Vidly.Migrations
 {
     using System;
     using System.Data.Entity.Migrations;
-    
+
     public partial class AddRentals : DbMigration
     {
         public override void Up()
@@ -10,21 +10,22 @@ namespace Vidly.Migrations
             CreateTable(
                 "dbo.Rentals",
                 c => new
-                    {
-                        Id = c.Byte(nullable: false),
-                        RentalDate = c.DateTime(nullable: false),
-                        ReturnDate = c.DateTime(),
-                        Customer_Id = c.Int(nullable: false),
-                        Movie_Id = c.Int(nullable: false),
-                    })
+                {
+
+                    Id = c.Int(nullable: false, identity: true),
+                    RentalDate = c.DateTime(nullable: false),
+                    ReturnDate = c.DateTime(),
+                    Customer_Id = c.Int(nullable: false),
+                    Movie_Id = c.Int(nullable: false),
+                })
                 .PrimaryKey(t => t.Id)
                 .ForeignKey("dbo.Customers", t => t.Customer_Id, cascadeDelete: true)
                 .ForeignKey("dbo.Movies", t => t.Movie_Id, cascadeDelete: true)
                 .Index(t => t.Customer_Id)
                 .Index(t => t.Movie_Id);
-            
+
         }
-        
+
         public override void Down()
         {
             DropForeignKey("dbo.Rentals", "Movie_Id", "dbo.Movies");

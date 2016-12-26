@@ -1,8 +1,5 @@
-﻿.twitter-typeahead {
-    width: 300px;
-}
-
-.typeahead {
+﻿body {
+    .typeahead {
   background-color: #fff;
 }
 
@@ -37,19 +34,19 @@
 
 .tt-suggestion {
   padding: 3px 20px;
-  font-size: 15px;
+  font-size: 18px;
   line-height: 24px;
 }
 
 .tt-suggestion:hover {
   cursor: pointer;
-  color: #52656B;
-  background-color: #CDFF00;
+  color: #fff;
+  background-color: #0097cf;
 }
 
 .tt-suggestion.tt-cursor {
-  color: #52656B;
-  background-color: #CDFF00;
+  color: #fff;
+  background-color: #0097cf;
 
 }
 
@@ -57,6 +54,7 @@
   margin: 0;
 }
 
-.tt-container {
-    position: relative;
+.tt-container{
+    position:relative
+}
 }
